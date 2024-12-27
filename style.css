@@ -263,3 +263,27 @@ html, body {
     width: 36px;
     height: 36px;
 }
+
+/* Apply the custom bullet for all <li> elements within the pricing cards */
+.pricing-cards ul {
+  list-style: none; /* Remove default bullet points */
+  padding: 0;       /* Remove default padding */
+}
+
+.pricing-cards li {
+  position: relative;      /* Enable positioning for the bullet image */
+  padding-left: 30px;      /* Add space for the bullet image */
+  margin-bottom: 10px;     /* Add spacing between items */
+}
+
+.pricing-cards li::before {
+  content: '';             /* Add a pseudo-element for the bullet */
+  position: absolute;      /* Position it relative to the <li> */
+  left: 0;                 /* Align it to the left of the text */
+  top: 50%;                /* Center it vertically */
+  transform: translateY(-50%);
+  width: 20px;             /* Set the size of the bullet */
+  height: 20px;
+  background: url('images/tick.gif') no-repeat center center;
+  background-size: contain; /* Ensure the bullet scales properly */
+}
