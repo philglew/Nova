@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Vanta background
-    VANTA.FOG({
+  // Vanta background
+  VANTA.FOG({
       el: "#bg",
       mouseControls: true,
       touchControls: true,
@@ -12,43 +12,47 @@ document.addEventListener('DOMContentLoaded', () => {
       blurFactor: 0.60,
       speed: 1.50,
       zoom: 0.50
-    });
   });
+});
+
+// Helper function to handle section transitions
+function switchSection(showSectionId) {
+  const sections = ['hero-section', 'pricing-section', 'modules-section', 'api-section'];
   
-  function showPricing() {
-    const hero = document.getElementById('hero-section');
-    const pricing = document.getElementById('pricing-section');
-  
-    // Fade out hero
-    hero.classList.remove('fade-in');
-    hero.classList.add('fade-out');
-    
-    // Once fade-out is done, hide hero & show pricing
-    setTimeout(() => {
-      hero.classList.add('hidden');
-      hero.classList.remove('fade-out');
-  
-      // Show pricing
-      pricing.classList.remove('hidden');
-      pricing.classList.add('fade-in');
-    }, 500);
-  }
-  
-  function showHome() {
-    const hero = document.getElementById('hero-section');
-    const pricing = document.getElementById('pricing-section');
-  
-    // Fade out pricing
-    pricing.classList.remove('fade-in');
-    pricing.classList.add('fade-out');
-  
-    setTimeout(() => {
-      pricing.classList.add('hidden');
-      pricing.classList.remove('fade-out');
-  
-      // Show hero
-      hero.classList.remove('hidden');
-      hero.classList.add('fade-in');
-    }, 500);
-  }
-  
+  // Fade out all visible sections
+  sections.forEach(sectionId => {
+      const section = document.getElementById(sectionId);
+      if (!section.classList.contains('hidden')) {
+          section.classList.remove('fade-in');
+          section.classList.add('fade-out');
+          setTimeout(() => {
+              section.classList.add('hidden');
+              section.classList.remove('fade-out');
+          }, 500);
+      }
+  });
+
+  // Fade in the target section
+  setTimeout(() => {
+      const targetSection = document.getElementById(showSectionId);
+      targetSection.classList.remove('hidden');
+      targetSection.classList.add('fade-in');
+  }, 500);
+}
+
+// Simplified section-specific functions
+function showHome() {
+  switchSection('hero-section');
+}
+
+function showPricing() {
+  switchSection('pricing-section');
+}
+
+function showModules() {
+  switchSection('modules-section');
+}
+
+function showAPI() {
+  switchSection('api-section');
+}

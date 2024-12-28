@@ -4,22 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <title>Nova - Next-Gen HCM</title>
+    <title>Nova - Open Source HCM</title>
 
-    <!-- Main CSS -->
     <link rel="stylesheet" href="style.css" />
 
-    <!-- Three.js + Vanta Fog -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
     <script src="https://unpkg.com/vanta/dist/vanta.fog.min.js"></script>
 </head>
 <body>
-    <!-- Background element for Vanta -->
+
     <div id="bg"></div>
 
-    <!-- Main content wrapper -->
     <div class="main-content">
-        <!-- NAVBAR -->
+
         <header class="navbar">
             <div class="container">
                 <div class="nav-left">
@@ -30,7 +27,8 @@
                 <nav class="nav-menu">
                     <ul>
                         <li><a href="#" onclick="showPricing()">Pricing</a></li>
-                        <li><a href="#">Modules</a></li>
+                        <li><a href="#" onclick="showModules()">Modules</a></li>
+                        <li><a href="#" onclick="showAPI()">API</a></li>
                         <li><a href="#">About Nova</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
@@ -42,14 +40,12 @@
             </div>
         </header>
 
-        <!-- Content sections -->
-        <!-- HERO SECTION -->
         <section class="hero container" id="hero-section">
             <h1>Nova HR</h1>
             <p>Nova; the world's first all-in-one open-source HR human capital management platform.</p>
         </section>
 
-        <!-- PRICING SECTION -->
+
         <section class="pricing container hidden" id="pricing-section">
             <h1>Pricing</h1>
             <div class="pricing-intro">
@@ -58,7 +54,6 @@
             </div>
             
             <div class="pricing-cards">
-                <!-- Free Plan -->
                 <div class="card">
                     <div class="card-content">
                         <div class="card-header">
@@ -78,7 +73,6 @@
                     <button>Start Free</button>
                 </div>
 
-                <!-- Small Business Plan -->
                 <div class="card">
                     <div class="card-content">
                         <div class="card-header">
@@ -101,7 +95,6 @@
                     <button>Start Free</button>
                 </div>
 
-                <!-- Enterprise Plan -->
                 <div class="card">
                     <div class="card-content">
                         <div class="card-header">
@@ -127,9 +120,63 @@
                 </div>
             </div>
         </section>
-    </div>
+ 
+    <!-- MODULES SECTION -->
+        <section class="modules container hidden" id="modules-section">
+            <h1>Modules</h1>
+            <div class="modules-intro">
+                <br><p>Discover the full suite of modules available in Nova. All of these modules are included <u>as standard</u> across all pricing tiers. </p><br>
+                <p>Each module is designed to optimise your HR processes, allowing your business to reach new heights with minimal effort.</p>
+            </div>
+            <div class="modules-list">
+                <div class="module-item">
+                    <h3>Onboarding</h3>
+                    <p>Simplify new employee onboarding with automated workflows.</p>
+                </div>
+                <div class="module-item">
+                    <h3>Performance Management</h3>
+                    <p>Track and enhance employee performance with advanced tools.</p>
+                </div>
+                <div class="module-item">
+                    <h3>Sickness and absence</h3>
+                    <p>Automate and manage payroll processes efficiently.</p>
+                </div>
+                <div class="module-item">
+                    <h3>Appraisal</h3>
+                    <p>Automate and manage payroll processes efficiently.</p>
+                </div>
+                <div class="module-item">
+                    <h3>Disciplinaries</h3>
+                    <p>Automate and manage payroll processes efficiently.</p>
+                </div>
+                <div class="module-item">
+                    <h3>Document management</h3>
+                    <p>Automate and manage payroll processes efficiently.</p>
+                </div>
+                <div class="module-item">
+                    <h3>Time tracking</h3>
+                    <p>Automate and manage payroll processes efficiently.</p>
+                </div>
+                <div class="module-item">
+                    <h3>Business Continuity and Disaster Recovery</h3>
+                    <p>Automate and manage payroll processes efficiently.</p>
+                </div>
+                <div class="module-item">
+                    <h3>Hierarchies and reporting lines</h3>
+                    <p>Automate and manage payroll processes efficiently.</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- MAIN SCRIPT -->
+    <!-- API SECTION -->
+        <section class="api container hidden" id="api-section">
+            <h1>The Nova API</h1>
+            <div class="api-intro">
+                <br><p>Our REST API is not like other HCM platform APIs. It's much better. Here's why...</p><br>
+                <p>Each module is designed to optimise your HR processes, allowing your business to reach new heights with minimal effort.</p>
+            </div>
+    </div>  
+</section>      
     <script src="app.js"></script>
 </body>
 </html>
