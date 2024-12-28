@@ -56,3 +56,27 @@ function showModules() {
 function showAPI() {
   switchSection('api-section');
 }
+
+function toggleMenu() {
+  const hamburger = document.querySelector('.hamburger');
+  const mobileNav = document.querySelector('.mobile-nav-content');
+  
+  hamburger.classList.toggle('active');
+  mobileNav.classList.toggle('active');
+
+  // Prevent body scrolling when menu is open
+  document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+}
+
+// Close menu when clicking a link
+document.querySelectorAll('.nav-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+      const mobileNav = document.querySelector('.mobile-nav-content');
+      const hamburger = document.querySelector('.hamburger');
+      if (mobileNav.classList.contains('active')) {
+          mobileNav.classList.remove('active');
+          hamburger.classList.remove('active');
+          document.body.style.overflow = 'auto';
+      }
+  });
+});
