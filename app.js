@@ -90,3 +90,15 @@ window.addEventListener('scroll', function() {
     navbar.classList.remove('scrolled');
   }
 });
+
+const pricingCards = document.querySelector('.pricing-cards');
+const cardWidth = document.querySelector('.card').offsetWidth;
+
+pricingCards.addEventListener('click', (event) => {
+  if (event.target.tagName === 'DIV' && event.target.classList.contains('pricing-cards')) {
+    pricingCards.scrollBy({
+      left: cardWidth,
+      behavior: 'smooth'
+    });
+  }
+});
