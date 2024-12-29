@@ -33,8 +33,10 @@ html, body {
 }
 
 /* Container for horizontal margins */
+/* CHANGED: Force 1200px wide on desktop so partial card is hidden. */
 .container {
-  max-width: 1200px;
+  width: 1200px;       /* <- Force container to exactly 1200px on desktop */
+  max-width: 1200px;   /* Redundant but safe fallback */
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -150,17 +152,65 @@ html, body {
 /* Updated pricing cards for better responsive behavior */
 .pricing-cards {
   display: flex;
+  /* KEY: Don’t wrap so we get one row, partially hiding the 4th card. */
+  flex-wrap: nowrap;
+
   gap: 2rem;
   margin-top: 2rem;
+
+  /* Ensure any overflow is hidden horizontally 
+     so that the 4th card can be partially off-screen 
+     until we scroll */
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative; /* So our arrow can absolutely position */
 }
+
+.scroll-arrow {
+  position: absolute;
+  right: 0.5rem; 
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.3rem 0.6rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none; /* Hidden by default */
+}
+
+/* Show the arrow only when hovering over the .pricing-cards container */
+.pricing-cards:hover ~ .scroll-arrow,
+.scroll-arrow:hover {
+  display: block;
+}
+
+.pricing-cards::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  pointer-events: none;
+  /* If your page BG is a gradient, you can do: */
+  background: linear-gradient(to left, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%);
+  /* or remove entirely as above */
+}
+
 
 .card {
   background: #000;
   border: 1px solid #fff;
   border-radius: 8px;
   padding: 1.5rem;
-  width: 20rem;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
+
+  /* Prevent auto-shrinking or wrapping; fix width at 20rem. */
+  flex: 0 0 auto;
+  width: 20rem;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -169,7 +219,7 @@ html, body {
 /* Enhanced responsive styles */
 @media (max-width: 768px) {
   .pricing-cards {
-    flex-direction: column;
+    flex-direction: column; /* On mobile, stack them vertically */
     gap: 2rem;
   }
   
@@ -183,6 +233,9 @@ html, body {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+
+  /* Because we switch to stacked, you'll no longer see partial
+     4th card on smaller screens. That’s typical for mobile. */
 }
 
 /* Rest of card styles */
@@ -297,8 +350,8 @@ html, body {
 
 .card h1 {
   font-size: 2.5rem; /* Makes the price bigger */
-  line-height: 1; /* Ensures good spacing */
-  margin: 1rem 0; /* Adds some vertical spacing */
+  line-height: 1;    /* Ensures good spacing */
+  margin: 1rem 0;    /* Adds some vertical spacing */
 }
 
 /* Make the "/monthly" or "/user/month" text smaller */
@@ -309,146 +362,146 @@ html, body {
 }
 
 /* MODULES SECTION */
-/* Modules Section Styling */
 .modules {
-margin-top: 120px;
-color: #fff;
-text-align: left;
-}
-
-.modules-intro {
-margin-bottom: 2rem;
-}
-
-.modules-list {
-display: flex;
-flex-wrap: wrap;
-gap: 2rem;
-}
-
-.module-item {
-background: #000;
-border: 1px solid #fff;
-border-radius: 8px;
-padding: 1.5rem;
-width: calc(50% - 1rem);
-box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-.module-item h3 {
-margin-bottom: 0.5rem;
-font-size: 1.25rem;
-}
-
-.module-item p {
-margin: 0;
-color: #e0e0e0;
-}
-
-/* Responsive Design for Modules Section */
-@media (max-width: 768px) {
-.modules-list {
-    flex-direction: column;
-}
-
-.module-item {
-    width: 100%;
-}
-}
-
-.modules {
-margin-top: 8rem;
-color: #fff;
-text-align: left;
-}
-
-.modules-intro {
-margin-bottom: 2rem;
-}
-
-.modules-list {
-display: flex;
-flex-wrap: wrap;
-gap: 2rem;
-}
-
-.module-item {
-background: #000;
-border: 1px solid #fff;
-border-radius: 8px;
-padding: 1.5rem;
-width: calc(50% - 1rem);
-box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-.module-item h3 {
-margin-bottom: 0.5rem;
-font-size: 1.25rem;
-}
-
-.module-item p {
-margin: 0;
-color: #e0e0e0;
-}
-
-/* Responsive Design for Modules Section */
-@media (max-width: 768px) {
-.modules-list {
-    flex-direction: column;
-}
-
-.module-item {
-    width: 100%;
-}
-}
-
-.api {
   margin-top: 120px;
   color: #fff;
   text-align: left;
-  }
-  
-  .api-intro {
+}
+
+.modules-intro {
   margin-bottom: 2rem;
-  }
-  
-  .api-list {
+}
+
+.modules-list {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  }
-  
-  .api-item {
+}
+
+.module-item {
   background: #000;
   border: 1px solid #fff;
   border-radius: 8px;
   padding: 1.5rem;
   width: calc(50% - 1rem);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  }
-  
-  .api-item h3 {
+}
+
+.module-item h3 {
   margin-bottom: 0.5rem;
   font-size: 1.25rem;
-  }
-  
-  .api-item p {
+}
+
+.module-item p {
   margin: 0;
   color: #e0e0e0;
-  }
-  
-  /* Responsive Design for Modules Section */
-  @media (max-width: 768px) {
-  .api-list {
-      flex-direction: column;
-  }
-  
-  .api-item {
-      width: 100%;
-  }
+}
+
+/* Responsive Design for Modules Section */
+@media (max-width: 768px) {
+  .modules-list {
+    flex-direction: column;
   }
 
-  /* Hamburger menu button */
+  .module-item {
+    width: 100%;
+  }
+}
+
+/* Repeat modules styling to override duplication (if present) */
+.modules {
+  margin-top: 8rem;
+  color: #fff;
+  text-align: left;
+}
+
+.modules-intro {
+  margin-bottom: 2rem;
+}
+
+.modules-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.module-item {
+  background: #000;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: calc(50% - 1rem);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.module-item h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.module-item p {
+  margin: 0;
+  color: #e0e0e0;
+}
+
+/* Responsive Design for Modules Section */
+@media (max-width: 768px) {
+  .modules-list {
+    flex-direction: column;
+  }
+
+  .module-item {
+    width: 100%;
+  }
+}
+
+.api {
+  margin-top: 120px;
+  color: #fff;
+  text-align: left;
+}
+
+.api-intro {
+  margin-bottom: 2rem;
+}
+
+.api-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.api-item {
+  background: #000;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: calc(50% - 1rem);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.api-item h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.api-item p {
+  margin: 0;
+  color: #e0e0e0;
+}
+
+/* Responsive Design for Modules Section */
+@media (max-width: 768px) {
+  .api-list {
+    flex-direction: column;
+  }
+
+  .api-item {
+    width: 100%;
+  }
+}
+
+/* Hamburger menu button */
 .hamburger {
   display: none; /* Hidden by default on desktop */
   flex-direction: column;
@@ -475,7 +528,7 @@ color: #e0e0e0;
 /* Mobile styles */
 @media (max-width: 768px) {
   .hamburger {
-      display: flex; /* Show hamburger on mobile */
+    display: flex; /* Show hamburger on mobile */
   }
 
   .mobile-nav-content {
@@ -489,42 +542,42 @@ color: #e0e0e0;
     transition: right 0.3s ease-in-out;
     -webkit-backdrop-filter: blur(10px); /* For Safari */
     backdrop-filter: blur(10px);
-}
+  }
 
   .mobile-nav-content.active {
-      right: 0; /* Slide in from right */
+    right: 0; /* Slide in from right */
   }
 
   .nav-menu ul {
-      flex-direction: column;
-      gap: 2rem;
+    flex-direction: column;
+    gap: 2rem;
   }
 
   .nav-menu a {
-      font-size: 1.2rem;
+    font-size: 1.2rem;
   }
 
   .nav-actions {
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
   }
 
   .nav-actions button {
-      width: 100%;
+    width: 100%;
   }
 
   /* Animate hamburger to X when menu is open */
   .hamburger.active span:first-child {
-      transform: rotate(45deg);
+    transform: rotate(45deg);
   }
 
   .hamburger.active span:nth-child(2) {
-      opacity: 0;
+    opacity: 0;
   }
 
   .hamburger.active span:last-child {
-      transform: rotate(-45deg);
+    transform: rotate(-45deg);
   }
 }
 
@@ -582,19 +635,18 @@ color: #e0e0e0;
 /* Responsive behavior */
 @media (max-width: 768px) {
   .dropdown-menu {
-      position: static;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
-      margin-top: 0;
-      padding-left: 1rem;
+    position: static;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin-top: 0;
+    padding-left: 1rem;
   }
   
   .dropdown:hover .dropdown-menu {
-      transform: none;
+    transform: none;
   }
 }
-
 
 .animated-border {
   position: relative;
@@ -629,4 +681,23 @@ color: #e0e0e0;
   100% {
     background-position: 0 0;
   }
+}
+
+/* ================================
+   6) HOVER REVEAL FOR 4TH CARD
+   ================================ */
+
+/* Add a smooth transition so the .pricing-cards can shift left. */
+.pricing-cards {
+  transition: transform 0.4s ease;
+}
+
+/* 
+   SHIFT .pricing-cards left so the 4th card is fully visible
+   when hovering over the arrow, if arrow is a sibling placed AFTER it.
+
+   Adjust -176px if needed, depending on your card widths & container size.
+*/
+.scroll-arrow:hover + .pricing-cards {
+  transform: translateX(-176px);
 }

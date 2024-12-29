@@ -92,7 +92,16 @@ window.addEventListener('scroll', function() {
 });
 
 const pricingCards = document.querySelector('.pricing-cards');
-const cardWidth = document.querySelector('.card').offsetWidth;
+const singleCardWidth = document.querySelector('.card').offsetWidth + 32;
+
+const scrollArrow = document.querySelector('.scroll-arrow');
+
+scrollArrow.addEventListener('click', () => {
+  pricingCards.scrollBy({
+    left: singleCardWidth * 1.5, // or *2 or *3, adjust to your liking
+    behavior: 'smooth'
+  });
+});
 
 pricingCards.addEventListener('click', (event) => {
   if (event.target.tagName === 'DIV' && event.target.classList.contains('pricing-cards')) {
