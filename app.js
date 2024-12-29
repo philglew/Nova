@@ -80,3 +80,13 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
       }
   });
 });
+
+// Add this code to your existing JavaScript file or script tag
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 0) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});

@@ -46,8 +46,15 @@ html, body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 999; /* Increase the z-index to keep the navbar above the content */
   background: transparent;
+  transition: background 0.3s ease-in-out; /* Add a transition for smooth background change */
+}
+
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.1); /* Adjust the background color and opacity as needed */
+  -webkit-backdrop-filter: blur(10px); /* Vendor prefix for Safari */
+  backdrop-filter: blur(10px); /* Apply a blur effect to create the glass-like appearance */
 }
 
 /* Rest of navbar styles remain the same */
@@ -116,7 +123,7 @@ html, body {
 .hero {
   position: relative;
   z-index: 1;
-  padding-top: 8rem; /* Changed from margin to padding */
+  padding-top: 120px; /* Changed from margin to padding */
   text-align: left;
   color: #fff;
 }
@@ -135,7 +142,7 @@ html, body {
 .pricing {
   position: relative;
   z-index: 1;
-  padding-top: 8rem;
+  padding-top: 120px;
   padding-bottom: 4rem; /* Added bottom padding */
   color: #fff;
 }
@@ -304,7 +311,7 @@ html, body {
 /* MODULES SECTION */
 /* Modules Section Styling */
 .modules {
-margin-top: 8rem;
+margin-top: 120px;
 color: #fff;
 text-align: left;
 }
@@ -396,7 +403,7 @@ color: #e0e0e0;
 }
 
 .api {
-  margin-top: 8rem;
+  margin-top: 120px;
   color: #fff;
   text-align: left;
   }
@@ -585,5 +592,41 @@ color: #e0e0e0;
   
   .dropdown:hover .dropdown-menu {
       transform: none;
+  }
+}
+
+
+.animated-border {
+  position: relative;
+}
+
+.animated-border::before,
+.animated-border::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ff0000, #00ff00, #0000ff);
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  animation: animate 20s linear infinite;
+  border-radius: 10px; /* Add this line */
+}
+
+.animated-border::after {
+  filter: blur(20px);
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 300% 0;
+  }
+  100% {
+    background-position: 0 0;
   }
 }
