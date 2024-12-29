@@ -218,21 +218,21 @@ html, body {
 
 /* Enhanced responsive styles */
 @media (max-width: 768px) {
-  .pricing-cards {
-    flex-direction: column; /* On mobile, stack them vertically */
-    gap: 2rem;
-  }
-  
-  .card {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-  }
-  
-  .hero, .pricing {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+.pricing-cards {
+  flex-direction: column; /* On mobile, stack them vertically */
+  gap: 2rem;
+}
+
+.card {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.hero, .pricing {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
   /* Because we switch to stacked, you'll no longer see partial
      4th card on smaller screens. That’s typical for mobile. */
@@ -399,13 +399,13 @@ html, body {
 
 /* Responsive Design for Modules Section */
 @media (max-width: 768px) {
-  .modules-list {
-    flex-direction: column;
-  }
+.modules-list {
+  flex-direction: column;
+}
 
-  .module-item {
-    width: 100%;
-  }
+.module-item {
+  width: 100%;
+}
 }
 
 /* Repeat modules styling to override duplication (if present) */
@@ -446,13 +446,13 @@ html, body {
 
 /* Responsive Design for Modules Section */
 @media (max-width: 768px) {
-  .modules-list {
-    flex-direction: column;
-  }
+.modules-list {
+  flex-direction: column;
+}
 
-  .module-item {
-    width: 100%;
-  }
+.module-item {
+  width: 100%;
+}
 }
 
 .api {
@@ -492,13 +492,13 @@ html, body {
 
 /* Responsive Design for Modules Section */
 @media (max-width: 768px) {
-  .api-list {
-    flex-direction: column;
-  }
+.api-list {
+  flex-direction: column;
+}
 
-  .api-item {
-    width: 100%;
-  }
+.api-item {
+  width: 100%;
+}
 }
 
 /* Hamburger menu button */
@@ -527,58 +527,58 @@ html, body {
 
 /* Mobile styles */
 @media (max-width: 768px) {
-  .hamburger {
-    display: flex; /* Show hamburger on mobile */
-  }
+.hamburger {
+  display: flex; /* Show hamburger on mobile */
+}
 
-  .mobile-nav-content {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Start off-screen */
-    width: 70%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
-    padding: 80px 20px 20px 20px;
-    transition: right 0.3s ease-in-out;
-    -webkit-backdrop-filter: blur(10px); /* For Safari */
-    backdrop-filter: blur(10px);
-  }
+.mobile-nav-content {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Start off-screen */
+  width: 70%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  padding: 80px 20px 20px 20px;
+  transition: right 0.3s ease-in-out;
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  backdrop-filter: blur(10px);
+}
 
-  .mobile-nav-content.active {
-    right: 0; /* Slide in from right */
-  }
+.mobile-nav-content.active {
+  right: 0; /* Slide in from right */
+}
 
-  .nav-menu ul {
-    flex-direction: column;
-    gap: 2rem;
-  }
+.nav-menu ul {
+  flex-direction: column;
+  gap: 2rem;
+}
 
-  .nav-menu a {
-    font-size: 1.2rem;
-  }
+.nav-menu a {
+  font-size: 1.2rem;
+}
 
-  .nav-actions {
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
+.nav-actions {
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
 
-  .nav-actions button {
-    width: 100%;
-  }
+.nav-actions button {
+  width: 100%;
+}
 
-  /* Animate hamburger to X when menu is open */
-  .hamburger.active span:first-child {
-    transform: rotate(45deg);
-  }
+/* Animate hamburger to X when menu is open */
+.hamburger.active span:first-child {
+  transform: rotate(45deg);
+}
 
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
 
-  .hamburger.active span:last-child {
-    transform: rotate(-45deg);
-  }
+.hamburger.active span:last-child {
+  transform: rotate(-45deg);
+}
 }
 
 /* Dropdown container */
@@ -634,18 +634,18 @@ html, body {
 
 /* Responsive behavior */
 @media (max-width: 768px) {
-  .dropdown-menu {
-    position: static;
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    margin-top: 0;
-    padding-left: 1rem;
-  }
-  
-  .dropdown:hover .dropdown-menu {
-    transform: none;
-  }
+.dropdown-menu {
+  position: static;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  margin-top: 0;
+  padding-left: 1rem;
+}
+
+.dropdown:hover .dropdown-menu {
+  transform: none;
+}
 }
 
 .animated-border {
