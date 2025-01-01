@@ -40,6 +40,12 @@ html, body {
   margin: 0 auto;
   padding: 0 2rem;
 }
+.navbar-container{
+  width: 1200px;       /* <- Force container to exactly 1200px on desktop */
+  max-width: 1200px;   /* Redundant but safe fallback */
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 
 /* === 2) NAVBAR === */
 .navbar {
@@ -60,7 +66,7 @@ html, body {
 }
 
 /* Rest of navbar styles remain the same */
-.navbar .container {
+.navbar .navbar-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -141,6 +147,7 @@ html, body {
 }
 
 /* === 4) PRICING SECTION === */
+
 .pricing {
   position: relative;
   z-index: 1;
@@ -156,17 +163,28 @@ html, body {
   flex-wrap: nowrap;
 
   gap: 2rem;
-  margin-top: 2rem;
-
+  padding: 2.5rem;
   /* Ensure any overflow is hidden horizontally 
      so that the 4th card can be partially off-screen 
      until we scroll */
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-x: auto;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* Modern alternative for smooth scrolling */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none; /* For Firefox */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+  /* Hide scrollbar for IE, Edge, and Firefox */
+  scrollbar-width: none;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
   position: relative; /* So our arrow can absolutely position */
 }
-
-.scroll-arrow {
+.pricing-cards::-webkit-scrollbar{
+  display: none;
+}
+.scroll-arrow, .scroll-arrow-left {
   position: absolute;
   right: 0.5rem; 
   top: 50%;
@@ -179,10 +197,13 @@ html, body {
   cursor: pointer;
   display: none; /* Hidden by default */
 }
-
+.scroll-arrow-left{
+  right: calc(100% - 3.5rem);
+  /* transform: translateY(-50%) rotate(180deg); */
+}
 /* Show the arrow only when hovering over the .pricing-cards container */
-.pricing-cards:hover ~ .scroll-arrow,
-.scroll-arrow:hover {
+.pricing-cards-wrapper:hover ~ .scroll-arrow, .pricing-cards-wrapper:hover ~ .scroll-arrow-left,
+.scroll-arrow:hover, .scroll-arrow-left:hover {
   display: block;
 }
 
@@ -300,7 +321,28 @@ html, body {
 .fade-out {
   animation: fadeOut 0.5s forwards;
 }
-
+.pricing-cards-wrapper{
+  position: relative;
+  border-radius: 20px;
+  margin-top: 2rem;
+  overflow: hidden;
+}
+.fade-right, .fade-left{
+  position: absolute;
+  height: 100%;
+  width: 100px;
+  top: 0;
+}
+.fade-right{
+  right: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) , rgba(0, 0, 0, 0.4) );
+  border-radius: 0px 20px 20px 0px;
+}
+.fade-left {
+  left: 0;
+  background: linear-gradient(270deg, rgba(255, 255, 255, 0) , rgba(0, 0, 0, 0.4) );
+  border-radius: 20px 0px 0px 20px;
+}
 @keyframes fadeIn {
   0%   { opacity: 0; }
   100% { opacity: 1; }
@@ -433,7 +475,40 @@ html, body {
   width: calc(50% - 1rem);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
-
+/* .module-item{
+  transition: max-height 0.3s ease-in-out;
+  max-height: 115px;
+  overflow: hidden;
+} */
+/* .module-item p{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: white-space 0.3s ease-in-out, overflow 0.3s ease-in-out;
+}
+.module-item:hover{
+  max-height: 600px;
+}
+*/
+.module-item {
+  transition: max-height 0.3s ease-in-out;
+  max-height: 115px;
+}
+.module-item:hover {
+  max-height: 800px;
+}
+.module-item p{
+  overflow: hidden;
+  position: relative;
+  line-height: 28px;
+  max-height: 28px;
+  transition: max-height 0.3s ease-in-out;
+}
+.module-item:hover > p{
+  /* white-space: normal; Allow the text to wrap and show full content */
+  /* overflow: visible; Ensure full content is shown */
+  max-height: 600px;
+} 
 .module-item h3 {
   margin-bottom: 0.5rem;
   font-size: 1.25rem;
@@ -526,6 +601,22 @@ html, body {
 }
 
 /* Mobile styles */
+@media (max-width: 768px) {
+  .container{
+    max-width: 100%;
+  }
+  .navbar-container{
+    max-width: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .mobile-nav-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 0.33;
+  }
+}
 @media (max-width: 768px) {
 .hamburger {
   display: flex; /* Show hamburger on mobile */
@@ -641,6 +732,10 @@ html, body {
   box-shadow: none;
   margin-top: 0;
   padding-left: 1rem;
+  display: block;
+  opacity: 1;
+  /* transform: translateY(0); */
+  gap: 0rem!important;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -698,6 +793,105 @@ html, body {
 
    Adjust -176px if needed, depending on your card widths & container size.
 */
-.scroll-arrow:hover + .pricing-cards {
+.scroll-arrow:hover + .pricing-cards,
+.scroll-arrow-left:hover+.pricing-cards{
   transform: translateX(-176px);
+}
+
+.try-it-free-btn-wrapper{
+  transition: none;
+  max-width: 250px;
+  /* overflow: hidden; */
+  border-radius: 9999px;
+  box-shadow: inset 0 0 3px 0px #0000006e;
+  padding: 4px;
+  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 50%, #ff7950 100%);
+}
+.try-it-free-btn {
+  cursor: pointer;
+  position: relative;
+  background-color: var(--bg-color);
+  color: #5A250A;
+  background: #dcdcdc;
+  /* border: 1px solid #5A250A; */
+  padding: 12px;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 9999px;
+  text-align: center;
+  font-weight: 600;
+  height: 40px;
+}
+.try-it-free-btn span{
+  font-size: 14px;
+  -webkit-user-select: none;
+  user-select: none;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  line-height: 40px;
+  width: 100%;
+  z-index: 2;
+  transform: translateX(-50%);
+}
+.btn-radial-hover-effect{
+  border-radius: 9999px;
+  transform: translateX(-50%);
+  top: 0;
+  left: 100%;
+  position: absolute;
+  height: 100%;
+  width: 200px;
+  background-image: radial-gradient(43.3% 100% at 50% 49.51%, #fffff7 29%, #fffacd 48.5%, #f4d2bf 60.71%, hsla(15, 5%, 83%, 0) 100%);
+  /* transition: left 0.25s ease; */
+}
+@property --myColor1 {
+  syntax: '<color>';
+  initial-value: #2357ff;
+  inherits: false;
+}
+
+@property --myColor2 {
+  syntax: '<color>';
+  initial-value: #ff7950;
+  inherits: false;
+}
+@property --gradient-angle {
+    syntax: "<angle>"; /* Specifies the data type is angle */
+    initial-value: 45deg; /* Initial value */
+    inherits: false; /* Does not inherit from parent elements */
+}
+.gradient-border-container{
+  transition: all 500ms ease;
+  max-width: 650px;
+  max-height: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 4px;
+  
+  background: linear-gradient(var(--gradient-angle),var(--myColor1) 0%,
+    #ffffff00 25%, #ffffff00 75%, var(--myColor2) 100%);
+    animation: border-grad 15s infinite;
+}
+.gradient-border-container .content{
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 100%;
+  /* margin-bottom: -7px; */
+}
+.gradient-border-container .content *{
+  max-width: 100%;
+}
+
+@keyframes border-grad {
+  0%{
+    --gradient-angle: 45deg;
+  }
+  50%{
+    --gradient-angle: 225deg;
+  }
+  100%{
+    --gradient-angle: 405deg;
+  }
 }
