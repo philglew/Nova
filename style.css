@@ -806,6 +806,7 @@ html, body {
   box-shadow: inset 0 0 3px 0px #0000006e;
   padding: 4px;
   background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 50%, #ff7950 100%);
+  margin-top: 2rem;
 }
 .try-it-free-btn {
   cursor: pointer;
@@ -868,6 +869,9 @@ html, body {
   overflow: hidden;
   border-radius: 20px;
   padding: 4px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 2rem;
   
   background: linear-gradient(var(--gradient-angle),var(--myColor1) 0%,
     #ffffff00 25%, #ffffff00 75%, var(--myColor2) 100%);
